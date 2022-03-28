@@ -1,5 +1,5 @@
 from sql_executor import *
-import kalashnikovDB as ak47
+import kalashnikovDB as AK47
 
 
 # sql_executor tests by Marko Sinko
@@ -52,8 +52,8 @@ initialize()
 executor = sql_executor()
 
 student_attr_name = ["id_student", "first_name", "last_name", "year_of_birth", "grade_avg"]
-student_attr_type = [ak47.TYPE_INT, ak47.TYPE_VARCHAR, ak47.TYPE_VARCHAR, ak47.TYPE_INT, ak47.TYPE_FLOAT]
-ak47.create_header_test("student", student_attr_name, student_attr_type)
+student_attr_type = [AK47.TYPE_INT, AK47.TYPE_VARCHAR, AK47.TYPE_VARCHAR, AK47.TYPE_INT, AK47.TYPE_FLOAT]
+AK47.create_header_test("student", student_attr_name, student_attr_type)
 
 insert_into1_output = executor.insert("INSERT INTO student VALUES ('1','Marko','Sinko','1990','2.0')")
 insert_into2_output = executor.insert(
@@ -76,11 +76,11 @@ def insert_into_test():
 # CREATE GROUP TEST
 # tokens are not implemented for this test, need to create Create_group_command() token
 # for further testing, need implementation, need to check AK_group_add() function
-# AK_group_add(tokens.groupname, ak47.NEW_ID) -- weird input params?? groupname-NEW_ID??
+# AK_group_add(tokens.groupname, AK47.NEW_ID) -- weird input params?? groupname-NEW_ID??
 
 
 # GRANT TEST
-# ak47.AK_user_add("100", id(1111), "10")
+# AK47.AK_user_add("100", id(1111), "10")
 # grant = Grant_command()
 # grant.command = "GRANT INSERT ON student TO Marko"
 # grant_output = grant.execute()
@@ -164,14 +164,14 @@ def sequence_test():
 # need to reimplement tokenizing of AK_parse_create_table() because it doesn't have AK_TYPE_INT,AK_TYPE_VARCHAR types that are
 # needed for adding attributes to the table
 # INT is not used
-# need to have this structure: [ak47.TYPE_INT, ak47.TYPE_VARCHAR, ak47.TYPE_VARCHAR, ak47.TYPE_INT, ak47.TYPE_FLOAT] like in the example above
+# need to have this structure: [AK47.TYPE_INT, AK47.TYPE_VARCHAR, AK47.TYPE_VARCHAR, AK47.TYPE_INT, AK47.TYPE_FLOAT] like in the example above
 # UPDATE:
 # parameter in execute method is not used and it should be removed or the need of using the expr attribute should be changed
 # IMPORTANT: execute method returns result that table is created but that table cannot be printed (it says table doesn't exist)
 create = Create_table_command()
 create.expr = "CREATE TABLE tbl (var1 INT, var2 INT)"
 create_table_output = create.execute("CREATE TABLE tbl (var1 INT, var2 INT)")
-ak47.AK_print_table("tbl")
+AK47.AK_print_table("tbl")
 
 
 def create_table_test():

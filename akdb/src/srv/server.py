@@ -8,7 +8,7 @@ import sys, os
 import time
 
 sys.path.append("../swig/")
-import kalashnikovDB as ak47
+import kalashnikovDB as AK47
 import sql_executor as sqle
 import server_functions as srv
 #Refactored and documented by Marko Vertus

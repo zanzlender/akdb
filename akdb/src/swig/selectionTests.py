@@ -1,11 +1,11 @@
-import kalashnikovDB as ak47
+import kalashnikovDB as AK47
 import test_strings as ts
 from test import *
 
 f = Functions()
-ak47.AK_inflate_config()
-ak47.AK_init_disk_manager()
-ak47.AK_memoman_init()
+AK47.AK_inflate_config()
+AK47.AK_init_disk_manager()
+AK47.AK_memoman_init()
 
 create_tables()
 # author: Luka Rajcevic
@@ -15,7 +15,7 @@ student_attr_name = ["id_student", "firstname", "lastname", "year", "weight"]
 selection_query_1 = ["year", "1991", ">"]
 selection_query_2 = ["year", "1990", ">"]
 selection_query_3 = ["firstname", "Manuel", "=="]
-selection_query_1_types = [ak47.TYPE_ATTRIBS, ak47.TYPE_INT, ak47.TYPE_OPERATOR]
+selection_query_1_types = [AK47.TYPE_ATTRIBS, AK47.TYPE_INT, AK47.TYPE_OPERATOR]
 # author: Luka Rajcevic
 # test functions for CRUD operations
 # current bugs:
