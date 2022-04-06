@@ -807,7 +807,7 @@ void AK_create_test_table_professor2(){
 
     struct list_node *row_root = (struct list_node *) AK_malloc(sizeof (struct list_node));
 
-	AK_DeleteAll_L3(&row_root);
+	//AK_DeleteAll_L3(&row_root);
 	AK_Init_L3(&row_root);
 
 	id_prof = 35890;
@@ -1011,7 +1011,7 @@ void AK_create_test_table_employee(){
 
     struct list_node *row_root = (struct list_node *) AK_malloc(sizeof (struct list_node));
     //row_root = (element) AK_malloc(sizeof (list));
-	AK_DeleteAll_L3(&row_root);
+	//AK_DeleteAll_L3(&row_root);
     AK_Init_L3(&row_root);
 
     id_prof = 35890;
@@ -1216,7 +1216,7 @@ void AK_create_test_table_course(){
 
     struct list_node *row_root = (struct list_node *) AK_malloc(sizeof (struct list_node));
 
-    AK_DeleteAll_L3(&row_root);
+    //AK_DeleteAll_L3(&row_root);
     AK_free(row_root);
 
     AK_EPI;
