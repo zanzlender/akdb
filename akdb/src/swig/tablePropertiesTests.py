@@ -1,14 +1,14 @@
 # all tests are ok
 # functions are written in test.py and imported here then tested with doctest
 
-import kalashnikovDB as ak47
+import kalashnikovDB as AK47
 import test_strings as ts
 from test import *
 
 f = Functions()
-ak47.AK_inflate_config()
-ak47.AK_init_disk_manager()
-ak47.AK_memoman_init()
+AK47.AK_inflate_config()
+AK47.AK_init_disk_manager()
+AK47.AK_memoman_init()
 
 create_tables()
 

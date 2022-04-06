@@ -1119,7 +1119,7 @@ void AK_copy_L(AK_list *src, AK_list *dest) {
         AK_PRO;
         //srcElem = (AK_list_elem) AK_malloc(sizeof(struct list_elem));
 	srcElem = (AK_list_elem) AK_First_L2(src);
-	destElem = (AK_list_elem) Ak_First_L2(dest);
+	destElem = (AK_list_elem) AK_First_L2(dest);
 
 	do {
 		AK_copy_L_Ele(srcElem, destElem);
