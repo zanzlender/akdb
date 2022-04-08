@@ -3,9 +3,8 @@ import sys
 from client import Client
 
 sys.path.append("../swig/")
-import kalashnikovDB as ak47
+import kalashnikovDB as AK47
 
-#TODO refactor code ( split logic to multiple files)
 if len(sys.argv) == 3:
     username = sys.argv[1]
     password = sys.argv[2]

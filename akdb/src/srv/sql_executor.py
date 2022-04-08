@@ -5,16 +5,16 @@ import time
 
 import sys
 sys.path.append('../swig/')
-import kalashnikovDB as ak47
+import kalashnikovDB as AK47
 import test
 import re
 import ctypes
 
 
 def initialize():
-    ak47.AK_inflate_config()
-    ak47.AK_init_disk_manager()
-    ak47.AK_memoman_init()
+    AK47.AK_inflate_config()
+    AK47.AK_init_disk_manager()
+    AK47.AK_memoman_init()
 
 # is_numeric
 # returns int or float value based on input type
@@ -91,7 +91,7 @@ def is_bool(lit):
     return lit.lower() in ("true", "false")
 
 # get_attr_type
-# returns value type code in ak47 notation defined in constants.c
+# returns value type code in AK47 notation defined in constants.c
 # @param value the value to be checked
 
 
@@ -106,42 +106,42 @@ def get_attr_type(value):
     boolean = is_bool(value.replace("'", ""))
 
     if integer:
-        return ak47.TYPE_INT
+        return AK47.TYPE_INT
     elif decimal:
-        return ak47.TYPE_FLOAT
+        return AK47.TYPE_FLOAT
     elif date:
-        return ak47.TYPE_DATE
+        return AK47.TYPE_DATE
     elif datetime:
-        return ak47.TYPE_DATETIME
+        return AK47.TYPE_DATETIME
     elif time:
-        return ak47.TYPE_TIME
+        return AK47.TYPE_TIME
     elif boolean:
-        return ak47.TYPE_BOOL
+        return AK47.TYPE_BOOL
     elif varchar:
-        return ak47.TYPE_VARCHAR
+        return AK47.TYPE_VARCHAR
     else:
         print "UNDEFINED"
 
 # get_type_name
-# returns type name for supplied type code in ak47 notation defined in constants.c
+# returns type name for supplied type code in AK47 notation defined in constants.c
 # @param code the type code to be checked
 
 
 def get_type_name(code):
 
-    if code == ak47.TYPE_INT:
+    if code == AK47.TYPE_INT:
         return "int"
-    elif code == ak47.TYPE_FLOAT:
+    elif code == AK47.TYPE_FLOAT:
         return "float"
-    elif code == ak47.TYPE_DATE:
+    elif code == AK47.TYPE_DATE:
         return "date"
-    elif code == ak47.TYPE_DATETIME:
+    elif code == AK47.TYPE_DATETIME:
         return "datetime"
-    elif code == ak47.TYPE_TIME:
+    elif code == AK47.TYPE_TIME:
         return "time"
-    elif code == ak47.TYPE_BOOL:
+    elif code == AK47.TYPE_BOOL:
         return "boolean"
-    elif code == ak47.TYPE_VARCHAR:
+    elif code == AK47.TYPE_VARCHAR:
         return "varchar"
     else:
         return "UNDEFINED"
@@ -175,7 +175,7 @@ class Print_table_command:
     # execute method
     # defines what is called when print command is invoked
     def execute(self):
-        ak47.AK_print_table(self.matcher.group(1))
+        AK47.AK_print_table(self.matcher.group(1))
         return "OK"
 
 # print_system_table_command
@@ -199,7 +199,7 @@ class Print_system_table_command:
 
 	string = self.matcher.group(1)
  	string = string.encode('utf-8')
-        ak47.AK_print_table(string)
+        AK47.AK_print_table(string)
         return "OK"
 
 # table_details_command
@@ -222,9 +222,9 @@ class Table_details_command:
     def execute(self, cmd):
         print "Printing out: "
         result = "Number of attributes: " + \
-            str(ak47.AK_num_attr(self.matcher.group(1)))
+            str(AK47.AK_num_attr(self.matcher.group(1)))
         result += "\nNumber od records: " + \
-            str(ak47.AK_get_num_records(self.matcher.group(1)))
+            str(AK47.AK_get_num_records(self.matcher.group(1)))
         return result
 
 
@@ -246,7 +246,7 @@ class Table_exists_command:
     # execute method
     # defines what is called when table_exists command is invoked
     def execute(self):
-        if ak47.AK_table_exist(self.matcher.group(1)) == 0:
+        if AK47.AK_table_exist(self.matcher.group(1)) == 0:
             result = "Table does not exist."
         else:
             result = "Table exists. You can see it by typing \p <table_name>."
@@ -300,7 +300,7 @@ class Create_sequence_command:
         # Check for sequence name, if already exists in database return false
         # Needs more revision for swig after buffer overflow is handled
         '''
-            names = ak47.AK_get_column(1, "AK_sequence")
+            names = AK47.AK_get_column(1, "AK_sequence")
             for name in set(names):
                 if(name==tok.seq_name):
                     error = "ERROR the name is already used"
@@ -308,13 +308,13 @@ class Create_sequence_command:
         '''
         # executing create statement
         try:
-            ak47.AK_sequence_add(str(tok.seq_name), int(tok.start_with), int(
+            AK47.AK_sequence_add(str(tok.seq_name), int(tok.start_with), int(
                 tok.increment_by), int(tok.max_value), int(tok.min_value), int(tok.cycle))
             result = "Command succesfully executed"
         except:
             result = "ERROR creating sequence didn't pass"
 
-        ak47.AK_print_table("AK_sequence")
+        AK47.AK_print_table("AK_sequence")
         return result
 
 # create table command
@@ -354,7 +354,7 @@ class Create_table_command:
         # table should not exist yet
         '''
             For some reason, AK_table_exist won't work, it always just exits here, so it's commented out
-            if (ak47.AK_table_exist(table_name) == 1):
+            if (AK47.AK_table_exist(table_name) == 1):
                 print "Error: table'" + table_name + "' already exist"
                 return False
         '''
@@ -370,7 +370,7 @@ class Create_table_command:
         attribute_count = len(create_table_attributes)
         # executing
         try:
-            ak47.AK_create_table(
+            AK47.AK_create_table(
                 table_name, create_table_attributes, attribute_count)
             result = "Table created"
         except:
@@ -413,7 +413,7 @@ class Create_index_command:
         # check if table exist
         '''
             For some reason, AK_table_exist won't work, it always just exits here, so it's commented out
-            if (ak47.AK_table_exist(table_name) == 0):
+            if (AK47.AK_table_exist(table_name) == 0):
             print "Error: table '"+ table_name +"' does not exist"
             return False
         '''
@@ -430,9 +430,9 @@ class Create_index_command:
             TypeError: in method 'AK_create_Index', argument 2 of type 'AK_list *'
             Uncomment the next line before testing to see the problem
         '''
-        # print ak47.AK_create_Index(index, t)
+        # print AK47.AK_create_Index(index, t)
         try:
-            ak47.AK_create_Index(index, t)
+            AK47.AK_create_Index(index, t)
             result = "Index created"
         except:
             result = "Error. Creating index failed."
@@ -475,7 +475,7 @@ class Create_trigger_command:
         # check if table exist
         '''
             For some reason, AK_table_exist won't work, it always just exits here, so it's commented out
-            if (ak47.AK_table_exist(table_name) == 0):
+            if (AK47.AK_table_exist(table_name) == 0):
                 print "Error: table '"+ table_name +"' does not exist"
                 return False
         '''
@@ -491,7 +491,7 @@ class Create_trigger_command:
             TypeError: in method 'AK_trigger_add', argument 3 of type 'AK_list *'
         '''
         try:
-            ak47.AK_trigger_add(trigger, token.whatOption,
+            AK47.AK_trigger_add(trigger, token.whatOption,
                                 p, table_name, token.functionName)
             result = "Trigger created"
         except:
@@ -523,7 +523,7 @@ class Insert_into_command:
             return False
         table_name = str(token.tableName)
         # does the table exist
-        if (ak47.AK_table_exist(table_name) == 0):
+        if (AK47.AK_table_exist(table_name) == 0):
             print "Error: table '" + table_name + "' does not exist"
             return False
         # data values for insert
@@ -534,10 +534,10 @@ class Insert_into_command:
             x.replace("'", "")), list(token.columnValues[0]))
         # get attributes array for table
         table_attr_names = str(
-            ak47.AK_rel_eq_get_atrributes_char(table_name)).split(";")
+            AK47.AK_rel_eq_get_atrributes_char(table_name)).split(";")
         # get attribute types for table
         table_attr_types = str(
-            ak47.AK_get_table_atribute_types(table_name)).split(";")
+            AK47.AK_get_table_atribute_types(table_name)).split(";")
         # attribute names for insert
         insert_attr_names = table_attr_names
         # attributes for insert
@@ -590,7 +590,7 @@ class Insert_into_command:
                     akdbError(expr, insert_attr_values[index])
                     print "Expected: " + type_name
                     return False
-        if(ak47.insert_data_test(table_name, insert_attr_names, insert_attr_values, insert_attr_types) == ak47.EXIT_SUCCESS):
+        if(AK47.insert_data_test(table_name, insert_attr_names, insert_attr_values, insert_attr_types) == AK47.EXIT_SUCCESS):
             return True
         else:
             return False
@@ -622,19 +622,19 @@ class Create_group_command:
 		if isinstance(tokens, basestring):
 			result = "Wrong command!"
 		else:
-			print "group id: ", ak47.AK_group_get_id(tokens.groupname)
+			print "group id: ", AK47.AK_group_get_id(tokens.groupname)
 
-		if ak47.AK_group_get_id(tokens.groupname) != -1:
+		if AK47.AK_group_get_id(tokens.groupname) != -1:
 			result += "ERROR: Group " + str(tokens.groupname) +" already exists"
 			return result
 
-		result += str(ak47.AK_group_add(tokens.groupname, ak47.NEW_ID))
+		result += str(AK47.AK_group_add(tokens.groupname, AK47.NEW_ID))
 		if tokens.users:
 			for user in tokens.users:
 				print "...added user: ", user
 				# User insert does not work. Password needs to be inserted in hash format.
-				#result += str(ak47.AK_user_add(user, password, ak47.NEW_ID))
-				#result += str(ak47.AK_add_user_to_group(user, tokens.groupname))
+				#result += str(AK47.AK_user_add(user, password, AK47.NEW_ID))
+				#result += str(AK47.AK_add_user_to_group(user, tokens.groupname))
 		return result
 '''
 
@@ -670,7 +670,7 @@ class Grant_command:
                     for table in tokens.tables:
                         msg += "...on table: " + table + "\n"
                         if tokens.group:
-                            res = ak47.AK_grant_privilege_group(
+                            res = AK47.AK_grant_privilege_group(
                                 user, table, privilege)
                             result += str(res)
 
@@ -680,7 +680,7 @@ class Grant_command:
                             else:
                                 print "ERROR: Group or table does not exsist: " + str(user) + str(table)
                         else:
-                            res = ak47.AK_grant_privilege_user(
+                            res = AK47.AK_grant_privilege_user(
                                 user, table, privilege)
                             result += str(res)
 
@@ -695,7 +695,7 @@ class Grant_command:
 # select
 # ALERT ******************************************************************
 # ----- translate expression from infix to postfix                                                  *
-# ----- add rest of the akdb types to 'get_attr_type()' ->------------------|                       *
+# ----- add rest of the AKdb types to 'get_attr_type()' ->------------------|                       *
 # -----  |-->  such as TYPE_ATTRIBS, TYPE_OPERAND, TYPE_OPERATOR, etc.      |                       *
 # ----- fix 'selection_test()' -> 'AK_selection':  ->-------------------------------------------|   *
 # -----  |-->  it selects all (*) data instead of taking 'selected attributes' in account  ->---|   *
@@ -728,16 +728,16 @@ class Select_command:
         # Selection table name
         table_name = str(token.tableName)
         return "a\n1\n2\n3\n4\n5"
-        if (ak47.AK_table_exist(table_name) == 0):
+        if (AK47.AK_table_exist(table_name) == 0):
             print "Error: table '" + table_name + "' does not exist"
             return False
 
         # Get table attribute list
         table_attr_names = str(
-            ak47.AK_rel_eq_get_atrributes_char(table_name)).split(";")
+            AK47.AK_rel_eq_get_atrributes_char(table_name)).split(";")
         # Get table attribute type
         table_attr_types = str(
-            ak47.AK_get_table_atribute_types(table_name)).split(";")
+            AK47.AK_get_table_atribute_types(table_name)).split(";")
         # Attribute names for selection (*)
         select_attr_names = table_attr_names
         # WHERE condition
@@ -815,11 +815,11 @@ class Select_command:
         # TEST DATA!
         print expression
         expression = ["year", "1990", ">"]
-        expr_types = [ak47.TYPE_ATTRIBS, ak47.TYPE_INT, ak47.TYPE_OPERATOR]
+        expr_types = [AK47.TYPE_ATTRIBS, AK47.TYPE_INT, AK47.TYPE_OPERATOR]
 
-        # if(ak47.AK_selection(table_name, resultTable, expression) ==
+        # if(AK47.AK_selection(table_name, resultTable, expression) ==
         # EXIT_SUCCESS):
-        if(ak47.selection_test(table_name, resultTable, expression, expr_types) == 1):
+        if(AK47.selection_test(table_name, resultTable, expression, expr_types) == 1):
             return True
         else:
             return False
@@ -857,7 +857,7 @@ class Update_command:
         # Update table name
         table_name = str(token.tableName)
 
-        if (ak47.AK_table_exist(table_name) == 0):
+        if (AK47.AK_table_exist(table_name) == 0):
             print "Error: table '" + table_name + "' does not exist"
             return False
 
@@ -865,10 +865,10 @@ class Update_command:
         # update_attr_values = map(lambda x: x.replace("'",""),list(token.columnValues[0]))
         # Get table attribute list
         table_attr_names = str(
-            ak47.AK_rel_eq_get_atrributes_char(table_name)).split(";")
+            AK47.AK_rel_eq_get_atrributes_char(table_name)).split(";")
         # Get table attribute type
         table_attr_types = str(
-            ak47.AK_get_table_atribute_types(table_name)).split(";")
+            AK47.AK_get_table_atribute_types(table_name)).split(";")
         # Attribute names for update
         update_attr_names = table_attr_names
         # WHERE condition
@@ -916,9 +916,9 @@ class Update_command:
         # Prepare update data element
         # This is Test Data!
         # Iteration required for more than one attribute!
-        element = ak47.list_node()
-        ak47.AK_Init_L3(id(element))
-        ak47.AK_DeleteAll_L3(id(element))
+        element = AK47.list_node()
+        AK47.AK_Init_L3(id(element))
+        AK47.AK_DeleteAll_L3(id(element))
 
         updateColumn = token.columnNames[0]
         whereColumn = token.condition[1][0]
@@ -926,26 +926,26 @@ class Update_command:
         newValue = token.columnValues[0]
 
         if type(whereValue) == int:
-            ak47.AK_Update_Existing_Element(
-                ak47.TYPE_INT, whereValue, table_name, updateColumn, element)
+            AK47.AK_Update_Existing_Element(
+                AK47.TYPE_INT, whereValue, table_name, updateColumn, element)
         elif type(whereValue) == float:
-            ak47.AK_Update_Existing_Element(
-                ak47.TYPE_FLOAT, whereValue, table_name, updateColumn, element)
+            AK47.AK_Update_Existing_Element(
+                AK47.TYPE_FLOAT, whereValue, table_name, updateColumn, element)
         # elif type(whereValue) == str:
-           # ak47.AK_Insert_New_Element_For_Update(ak47.TYPE_VARCHAR, whereValue, table_name, updateColumn, element, 1)
+           # AK47.AK_Insert_New_Element_For_Update(AK47.TYPE_VARCHAR, whereValue, table_name, updateColumn, element, 1)
 
         if type(newValue) == int:
-            ak47.AK_Insert_New_Element(
-                ak47.TYPE_INT, newValue, table_name, whereColumn, element)
+            AK47.AK_Insert_New_Element(
+                AK47.TYPE_INT, newValue, table_name, whereColumn, element)
         elif type(newValue) == float:
-            ak47.AK_Insert_New_Element(
-                ak47.TYPE_FLOAT, newValue, table_name, whereColumn, element)
+            AK47.AK_Insert_New_Element(
+                AK47.TYPE_FLOAT, newValue, table_name, whereColumn, element)
         # elif type(newValue) == str:
-            #ak47.AK_Insert_New_Element_For_Update(ak47.TYPE_VARCHAR, newValue, table_name, whereColumn, element, 0)
+            #AK47.AK_Insert_New_Element_For_Update(AK47.TYPE_VARCHAR, newValue, table_name, whereColumn, element, 0)
 
             #update_Row(table, column1, column2, key, new_value)
-        # if(ak47.update_Row(table_name, 'weight', 'id_student', 1, 80) == EXIT_SUCCESS):
-        # if(ak47.AK_update_row(element) == ak47.EXIT_SUCCESS):
+        # if(AK47.update_Row(table_name, 'weight', 'id_student', 1, 80) == EXIT_SUCCESS):
+        # if(AK47.AK_update_row(element) == AK47.EXIT_SUCCESS):
             # return True
         else:
             return False
@@ -983,82 +983,82 @@ class Drop_command:
             table_name = str(token.ime_objekta)
             table_name = table_name.translate(None, "'[]")
             # postoji li tablica
-            if (ak47.AK_table_exist(table_name) == 0):
+            if (AK47.AK_table_exist(table_name) == 0):
                 print "Error: table '" + table_name + "' does not exist"
                 return False
-            ak47.AK_drop_test_helper(0, table_name)
+            AK47.AK_drop_test_helper(0, table_name)
         elif(objekt == "index"):
             # izvlacimo ime indexa
             table_name = str(token.ime_objekta)
             table_name = table_name.translate(None, "'[]")
             # postoji li index
-            if (ak47.AK_table_exist(table_name) == 0):
+            if (AK47.AK_table_exist(table_name) == 0):
                 print "Error: index '" + table_name + "' does not exist"
                 return False
-            ak47.AK_drop_test_helper(1, table_name)
+            AK47.AK_drop_test_helper(1, table_name)
         elif(objekt == "view"):
             # izvlacimo ime view-a
             table_name = str(token.ime_objekta)
             table_name = table_name.translate(None, "'[]")
             # postoji li view
-            if (ak47.AK_table_exist(table_name) == 0):
+            if (AK47.AK_table_exist(table_name) == 0):
                 print "Error: table '" + table_name + "' does not exist"
                 return False
-            ak47.AK_drop_test_helper(2, table_name)
+            AK47.AK_drop_test_helper(2, table_name)
         elif(objekt == "sequence"):
             # izvlacimo ime sequence-a
             table_name = str(token.ime_objekta)
             table_name = table_name.translate(None, "'[]")
             # postoji li sequence
-            if (ak47.AK_table_exist(table_name) == 0):
+            if (AK47.AK_table_exist(table_name) == 0):
                 print "Error: sequence '" + table_name + "' does not exist"
                 return False
-            ak47.AK_drop_test_helper(3, table_name)
+            AK47.AK_drop_test_helper(3, table_name)
         elif(objekt == "trigger"):
             # izvlacimo ime triggera
             table_name = str(token.ime_objekta)
             table_name = table_name.translate(None, "'[]")
             # postoji li trigger
-            if (ak47.AK_table_exist(table_name) == 0):
+            if (AK47.AK_table_exist(table_name) == 0):
                 print "Error: trigger '" + table_name + "' does not exist"
                 return False
-            ak47.AK_drop_test_helper(4, table_name)
+            AK47.AK_drop_test_helper(4, table_name)
         elif(objekt == "function"):
             # izvlacimo ime funkcije
             table_name = str(token.ime_objekta)
             table_name = table_name.translate(None, "'[]")
             # postoji li funkcija
-            if (ak47.AK_table_exist(table_name) == 0):
+            if (AK47.AK_table_exist(table_name) == 0):
                 print "Error: funkcija '" + table_name + "' does not exist"
                 return False
-            ak47.AK_drop_test_helper(5, table_name)
+            AK47.AK_drop_test_helper(5, table_name)
         elif(objekt == "user"):
             # izvlacimo ime usera
             table_name = str(token.ime_objekta)
             table_name = table_name.translate(None, "'[]")
             # postoji li user
-            if (ak47.AK_table_exist(table_name) == 0):
+            if (AK47.AK_table_exist(table_name) == 0):
                 print "Error: user '" + table_name + "' does not exist"
                 return False
-            ak47.AK_drop_test_helper(6, table_name)
+            AK47.AK_drop_test_helper(6, table_name)
         elif(objekt == "group"):
             # izvlacimo ime grupe
             table_name = str(token.ime_objekta)
             table_name = table_name.translate(None, "'[]")
             # postoji li grupa
-            if (ak47.AK_table_exist(table_name) == 0):
+            if (AK47.AK_table_exist(table_name) == 0):
                 print "Error: group '" + table_name + "' does not exist"
                 return False
-            ak47.AK_drop_test_helper(7, table_name)
+            AK47.AK_drop_test_helper(7, table_name)
         elif(objekt == "constraint"):
             # izvlacimo ime constrainta
             table_name = str(token.ime_objekta)
             table_name = table_name.translate(None, "'[]")
             # postoji li constraint
-            if (ak47.AK_table_exist(table_name) == 0):
+            if (AK47.AK_table_exist(table_name) == 0):
                 print "Error: constraint '" + table_name + "' does not exist"
                 return False
-            ak47.AK_drop_test_helper(8, table_name)
+            AK47.AK_drop_test_helper(8, table_name)
 
 
 # sql_executor
@@ -1114,7 +1114,7 @@ class sql_executor:
             return False
         table_name = str(token.tableName)
         # is there a table
-        if (ak47.AK_table_exist(table_name) == 0):
+        if (AK47.AK_table_exist(table_name) == 0):
             print "Error: table '" + table_name + "' does not exist"
             return False
         # data values for insert
@@ -1125,10 +1125,10 @@ class sql_executor:
             x.replace("'", "")), list(token.columnValues[0]))
         # get array of attributes for table
         table_attr_names = str(
-            ak47.AK_rel_eq_get_atrributes_char(table_name)).split(";")
+            AK47.AK_rel_eq_get_atrributes_char(table_name)).split(";")
         # get attribute types for table
         table_attr_types = str(
-            ak47.AK_get_table_atribute_types(table_name)).split(";")
+            AK47.AK_get_table_atribute_types(table_name)).split(";")
         # attribute names for insert
         insert_attr_names = table_attr_names
         # attributes for insert
@@ -1181,7 +1181,7 @@ class sql_executor:
                     akdbError(expr, insert_attr_values[index])
                     print "Expected: " + type_name
                     return False
-        if(ak47.insert_data_test(table_name, insert_attr_names, insert_attr_values, insert_attr_types) == ak47.EXIT_SUCCESS):
+        if(AK47.insert_data_test(table_name, insert_attr_names, insert_attr_values, insert_attr_types) == AK47.EXIT_SUCCESS):
             return True
         else:
             return False

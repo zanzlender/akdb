@@ -8,7 +8,7 @@ import json
 import configparser
 
 sys.path.append("../swig/")
-import kalashnikovDB as ak47
+import kalashnikovDB as AK47
 import sql_executor as sqle
 
 config = configparser.ConfigParser()
@@ -29,19 +29,19 @@ class ParamikoServer(paramiko.ServerInterface):
         usr = "testingUser" #TODO get users and passwords from database
         #Testing the data format of AK_user_get_id(usr)
         #SIGSEGV ISSUE again
-        #return ak47.AK_user_get_id(usr)
+        #return AK47.AK_user_get_id(usr)
         pas = "testingPass"
         #local login using swig
 
     #Fran fix:
-    #if(ak47.AK_user_check_pass(username,password)==1)
+    #if(AK47.AK_user_check_pass(username,password)==1)
     #    return paramiko.AUTH_SUCCESSFUL
     #return paramiko.AUTH_FAILED
 
 
 
 
-    #    if(ak47.AK_user_get_id(usr)!=null):
+    #    if(AK47.AK_user_get_id(usr)!=null):
     #       return paramiko.AUTH_SUCCESSFUL
     #    elif(username == usr) and (password == pas):
     #        return paramiko.AUTH_SUCCESSFUL
