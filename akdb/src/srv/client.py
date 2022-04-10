@@ -41,8 +41,8 @@ class Client:
                 connected = True
                 print("[*] Connection established.")
             except paramiko.ssh_exception.AuthenticationException:
-                self.username = eval(input("Username: "))
-                self.password = eval(input("Password: "))
+                self.username = input("Username: ")
+                self.password = input("Password: ")
             except Exception as e:
                 # wait 2 seconds before attempting to connect again
                 print(e)
@@ -53,7 +53,7 @@ class Client:
 
         while self.working:
             try:
-                cmd = eval(input("akdb> "))
+                cmd = input("akdb> ")
                 #From this point forward until self.send_command(cmd), all we do is test the supported functions within client/server
                 if(cmd=="testme"):
                     failcounter=0
@@ -380,7 +380,7 @@ class Client:
         while "end" in rec and rec["end"] == False:
             print((rec["result"]))
             print((str(rec["startrow"]) + "-" + str(rec["endrow"]) + "/" + str(rec["max"])))
-            cont = eval(input("Continue (yes/no)? "))
+            cont = input("Continue (yes/no)? ")
             if cont == "yes":
                 self.session.send(self.pack_data({"continue": True}))
                 out = self.session.recv(1024)
