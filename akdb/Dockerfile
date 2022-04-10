@@ -15,6 +15,7 @@ RUN pip3 install virtualenv
 RUN pip3 install paramiko
 RUN pip3 install pyparsing
 RUN pip3 install configparser
+RUN pip3 install langdetect
 
 RUN mkdir -p /usr/akdb
 VOLUME ["/usr/akdb"]
