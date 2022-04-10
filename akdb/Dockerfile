@@ -13,7 +13,7 @@ RUN apt-get install texlive -y
 RUN apt-get install texlive-latex-extra -y
 RUN pip3 install virtualenv
 RUN pip3 install paramiko
-RUN pip3 install pyparsing
+RUN pip3 install pyparsing==2.4.7
 RUN pip3 install configparser
 RUN pip3 install langdetect
 
