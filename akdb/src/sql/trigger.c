@@ -37,7 +37,7 @@ int AK_trigger_save_conditions(int trigger, struct list_node *condition) {
 
     AK_Update_Existing_Element(TYPE_INT, &trigger, "AK_trigger_conditions", "trigger", row_root);
     if (AK_delete_row(row_root) == EXIT_ERROR){
-		AK_EPI;
+	AK_EPI;
         return EXIT_ERROR;
     }
 
@@ -54,11 +54,11 @@ int AK_trigger_save_conditions(int trigger, struct list_node *condition) {
         AK_Insert_New_Element(TYPE_INT, &temp->type, "AK_trigger_conditions", "type", row_root);
         if (AK_insert_row(row_root) == EXIT_ERROR) {
             AK_free(row_root);
-	    	AK_EPI;
+	    AK_EPI;
             return EXIT_ERROR;
         }
 
-		temp = AK_Next_L2(temp);
+	temp = AK_Next_L2(temp);
         i++;
         AK_DeleteAll_L3(&row_root);
     }
@@ -84,14 +84,14 @@ int AK_trigger_add(char *name, char* event, struct list_node *condition, char* t
     table_id = AK_get_table_obj_id(table);
 
     if(arguments_list == NULL) {
-		printf ("\nAK_trigger_add: Argument list is empty. Can not add this trigger: %s \n\n", name);
-		AK_EPI;
-		return EXIT_ERROR;
+	printf ("\nAK_trigger_add: Argument list is empty. Can not add this trigger: %s \n\n", name);
+	AK_EPI;
+	return EXIT_ERROR;
     }
 
     if (table_id == EXIT_ERROR) {
         printf ("\nAK_trigger_add: No such table upon which to create a trigger. Table name: %s \n\n", table);
-		AK_EPI;
+	AK_EPI;
         return EXIT_ERROR;
     }
 
@@ -99,15 +99,15 @@ int AK_trigger_add(char *name, char* event, struct list_node *condition, char* t
 
     if (funk_id == EXIT_ERROR) {
         printf ("\nAK_trigger_add: No such function to execute upon activation of trigger. Function name: %s \n\n", function);
-		AK_EPI;
+	AK_EPI;
         return EXIT_ERROR;
     }
 
     struct list_node *row_root = (struct list_node *) AK_malloc(sizeof (struct list_node));
 
     if (row_root == NULL){
-		printf ("\nRow root is NULL.\n");
-		AK_EPI;
+	printf ("\nRow root is NULL.\n");
+	AK_EPI;
        	return EXIT_ERROR;
     }
 
@@ -151,7 +151,7 @@ int AK_trigger_get_id(char *name, char *table) {
     AK_PRO;
     table_id = AK_get_table_obj_id(table);
     if (table_id == EXIT_ERROR){
-		AK_EPI;
+	AK_EPI;
         return EXIT_ERROR;
     }
 
@@ -161,7 +161,7 @@ int AK_trigger_get_id(char *name, char *table) {
         if (strcmp(name_elem->data, name) == 0 && table_id == (int) * table_elem->data) {
             i = (int) * row->next->data;
             AK_free(row);
-	    	AK_EPI;
+	    AK_EPI;
             return i;
         }
         i++;
@@ -181,8 +181,8 @@ int AK_trigger_get_id(char *name, char *table) {
  */
 int AK_trigger_remove_by_name(char *name, char *table) {
 	int trigg_id;
-    AK_PRO;
-    trigg_id = AK_trigger_get_id(name, table);
+    	AK_PRO;
+    	trigg_id = AK_trigger_get_id(name, table);
 	AK_EPI;
 	return AK_trigger_remove_by_obj_id(trigg_id);
 }
@@ -205,7 +205,7 @@ int AK_trigger_remove_by_obj_id(int obj_id) {
 
     if (result == EXIT_ERROR) {
         AK_dbg_messg(HIGH, TRIGGERS, "AK_trigger_remove_by_name: Could not delete trigger.\n");
-		AK_EPI;
+	AK_EPI;
         return EXIT_ERROR;
     }
 
@@ -238,7 +238,7 @@ int AK_trigger_edit(char *name, char* event, struct list_node *condition, char* 
 
     if (name == NULL || table == NULL) {
         AK_dbg_messg(HIGH, TRIGGERS, "AK_trigger_edit: Not enough data to identify the trigger.\n");
-		AK_EPI;
+	AK_EPI;
         return EXIT_ERROR;
     }
     int table_id = AK_get_table_obj_id(table); 
@@ -247,20 +247,20 @@ int AK_trigger_edit(char *name, char* event, struct list_node *condition, char* 
  
    if (function_id == EXIT_ERROR) {
         AK_dbg_messg(HIGH, TRIGGERS, "AK_trigger_edit: Could not update trigger. Function does not exist.\n");
-		AK_EPI;
+	AK_EPI;
         return EXIT_ERROR;
     }
 
     if(table_id == EXIT_ERROR){
-		AK_dbg_messg(HIGH, TRIGGERS, "\nAK_trigger_edit: Could not update trigger. Table %s does not exist.\n", table);
-		AK_EPI;
-		return EXIT_ERROR;
+	AK_dbg_messg(HIGH, TRIGGERS, "\nAK_trigger_edit: Could not update trigger. Table %s does not exist.\n", table);
+	AK_EPI;
+	return EXIT_ERROR;
     }
     
     if(trigger_id == EXIT_ERROR){
-		AK_dbg_messg(HIGH, TRIGGERS, "\nAK_trigger_edit: Could not update trigger. Trigger %s does not exist.\n", name);
-		AK_EPI;
-		return EXIT_ERROR;
+	AK_dbg_messg(HIGH, TRIGGERS, "\nAK_trigger_edit: Could not update trigger. Trigger %s does not exist.\n", name);
+	AK_EPI;
+	return EXIT_ERROR;
     }
 
     struct list_node *row_root = (struct list_node *) AK_malloc(sizeof (struct list_node));
@@ -284,7 +284,7 @@ int AK_trigger_edit(char *name, char* event, struct list_node *condition, char* 
 
     if (result == EXIT_ERROR) {
         AK_dbg_messg(HIGH, TRIGGERS, "AK_trigger_edit: Could not update trigger.\n");
-		AK_EPI;
+	AK_EPI;
         return EXIT_ERROR;
     }
     AK_EPI;
