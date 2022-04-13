@@ -1,5 +1,5 @@
 /**
- @file recovery.c Provides recovery functions.
+ @file recovery.cc Provides recovery functions.
  */
 
 /*
