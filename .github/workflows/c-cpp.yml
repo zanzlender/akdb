@@ -13,11 +13,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    - name: test123
+      run: pwd
     - name: configure
-      run: 
-        pwd
-        ls -la
-        ./configure
+      run: ./configure
     - name: make
       run: make
     - name: make check
