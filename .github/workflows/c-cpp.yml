@@ -16,6 +16,10 @@ jobs:
         run: pwd
       - name: list all files
         run: ls -la
+      - name: change dir
+        run: cd akdb/
+      - name: list all files
+        run: ls -la
       - name: install dependencies
         run: sudo apt-get install git build-essential swig make doxygen python3
       - name: docker idk
