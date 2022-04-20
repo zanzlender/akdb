@@ -2,24 +2,29 @@ name: C/C++ CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: test123
-      run: pwd
-    - name: configure
-      run: sudo ./configure
-    - name: make
-      run: make
-    - name: make check
-      run: make check
-    - name: make distcheck
-      run: make distcheck
+      - uses: actions/checkout@v3
+      - name: test123
+        run: pwd
+      - name: install dependencies
+        run: sudo apt-get install git build-essential swig make doxygen python3
+      - name: configure
+        run: ./configure
+      - name: make
+        run: make
+      - name: make check
+        run: make check
+      - name: make distcheck
+        run: make distcheck
+      - name: make doc
+        run: make doc
+      - name: make swig
+        run: make swig
