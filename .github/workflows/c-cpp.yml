@@ -16,7 +16,7 @@ jobs:
     - name: test123
       run: pwd
     - name: configure
-      run: ./configure
+      run: sudo ./configure
     - name: make
       run: make
     - name: make check
