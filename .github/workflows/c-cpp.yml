@@ -16,6 +16,8 @@ jobs:
         run: pwd
       - name: install dependencies
         run: sudo apt-get install git build-essential swig make doxygen python3
+      - name: docker idk
+        run: docker build -t akdb .
       - name: make
         run: make
       - name: make check
