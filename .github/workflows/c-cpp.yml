@@ -16,8 +16,6 @@ jobs:
         run: pwd
       - name: install dependencies
         run: sudo apt-get install git build-essential swig make doxygen python3
-      - name: configure
-        run: sudo ./configure
       - name: make
         run: make
       - name: make check
