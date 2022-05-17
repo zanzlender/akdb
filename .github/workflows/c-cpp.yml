@@ -43,7 +43,7 @@ jobs:
         working-directory: ./akdb/src
         run: make swig
 
-      - name: Run tests
+      - name: Run and print tests
         working-directory: ./akdb/bin
         run: ./akdb alltest
         continue-on-error: true
