@@ -62,7 +62,7 @@ jobs:
           pwd
           cd ..
       - name: cd test
-        run: git config --unset core.bare
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
 
       - uses: OrlovM/Wiki-Action@v1
         with:
