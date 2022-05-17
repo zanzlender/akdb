@@ -14,7 +14,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: install dependencies
         run: |
-          sudo apt-get install git build-essential swig make doxygen python2.7 dos2unix libffi-dev libssl-dev
+          sudo apt-get install git swig make doxygen dos2unix python3 python-dev python3-dev build-essential libssl-dev libffi-dev libxml2-dev libxslt1-dev zlib1g-dev python-pip
           sudo apt-get install texlive -y
           sudo apt-get install texlive-latex-extra -y
           sudo pip install virtualenv
