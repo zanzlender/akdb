@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: install dependencies
-        run: sudo apt-get install git build-essential swig make doxygen python3
+        run: sudo apt-get install git build-essential swig make doxygen python3 libffi-dev
 
       - name: PWD
         run: |
