@@ -17,10 +17,10 @@ jobs:
           sudo apt-get install git build-essential swig make doxygen python2.7 dos2unix libffi-dev libssl-dev
           sudo apt-get install texlive -y
           sudo apt-get install texlive-latex-extra -y
-          sudo apt-get install virtualenv
-          sudo apt-get install paramiko
-          sudo apt-get install pyparsing
-          sudo apt-get install configparser
+          sudo pip install virtualenv
+          sudo pip install paramiko
+          sudo pip install pyparsing
+          sudo pip install configparser
 
       - name: PWD
         run: |
