@@ -53,9 +53,9 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     name: Update wiki
-    working-directory: ~/
 
     steps:
+      working-directory: ~/
       - name: cd
         run: |
           pwd
