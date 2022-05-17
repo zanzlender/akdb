@@ -45,7 +45,8 @@ jobs:
 
       - name: Run tests
         working-directory: ./akdb/bin
-        run: ./akdb test 42
+        continue-on-error: true
+        run: ./akdb alltest
 
   publish:
     needs: build
@@ -54,3 +55,5 @@ jobs:
     steps:
       - name: Publish test
         run: ls -la
+
+      - name: Publish pdf file
