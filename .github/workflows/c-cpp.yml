@@ -25,9 +25,8 @@ jobs:
         run: sudo apt-get install git build-essential swig make doxygen python3
       - name: make
         working-directory: ./akdb
+
         run: make
-      - name: make check
-        run: make check
       - name: make distcheck
         run: make distcheck
       - name: make doc
