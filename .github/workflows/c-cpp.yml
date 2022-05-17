@@ -71,15 +71,9 @@ jobs:
 
     steps:
       - name: cd
-        working-directory: ./akdb
         run: |
           pwd
           ls -la
-
-      - name: cd test
-        run: |
-          git config --global --add safe.directory "$GITHUB_WORKSPACE"
-          git config --unset core.bare
 
       - uses: OrlovM/Wiki-Action@v1
         with:
