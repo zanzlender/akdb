@@ -19,6 +19,18 @@ jobs:
           cd akdb/
           ls -la
 
+      - name: Git config
+        run: |
+          git init
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          git config --unset core.bare
+
+      - name: Update wiki
+      - uses: OrlovM/Wiki-Action@v1
+        with:
+          path: "html"
+          token: ${{ secrets.GITHUB_TOKEN }}
+
       - name: install dependencies
         run: |
           sudo apt-get install git swig make doxygen dos2unix python3 python-dev python3-dev build-essential libssl-dev libffi-dev libxml2-dev libxslt1-dev zlib1g-dev
@@ -54,28 +66,32 @@ jobs:
         working-directory: ./akdb/bin
         run: ./akdb alltest
         continue-on-error: true
+#  update-wiki:
+#    needs: build
+#    runs-on: ubuntu-latest
+#    name: Update wiki
+#    defaults:
+#      run:
+#        working-directory: akdb
+#
+#    steps:
+#      - name: cd
+#        working-directory: ./akdb
+#        run: |
+#          pwd
+#          ls -la
+#          cd akdb/
+#
+#      - name: cd test
+#        run: |
+#          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+#          git config --unset core.bare
+#
+#      - uses: OrlovM/Wiki-Action@v1
+#        with:
+#          path: "html"
+#          token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Git config
-        run: |
-          git init
-          git config --global --add safe.directory "$GITHUB_WORKSPACE"
-          git config --unset core.bare
-
-  update-wiki:
-    needs: build
-    runs-on: ubuntu-latest
-    name: Update wiki
-
-    steps:
-      - name: cd
-        run: |
-          pwd
-          ls -la
-
-      - uses: OrlovM/Wiki-Action@v1
-        with:
-          path: "html"
-          token: ${{ secrets.GITHUB_TOKEN }}
 #  upload-pdf-file:
 #    name: Upload pdf file to repository
 #    runs-on: ubuntu-latest
