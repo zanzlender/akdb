@@ -27,18 +27,6 @@ jobs:
           sudo pip install pyparsing
           sudo pip install configparser
 
-      - name: PWD
-        run: |
-          pwd
-          ls -la
-          ls -la
-
-      - name: PWD
-        working-directory: ./akdb
-        run: |
-          pwd
-          ls -la
-
       - name: make
         working-directory: ./akdb/src
         run: |
@@ -57,7 +45,7 @@ jobs:
 
       - name: Run tests
         working-directory: ./akdb/bin
-        run: ./akdb alltest
+        run: ./akdb test 41
 
   publish:
     needs: build
