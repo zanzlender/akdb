@@ -20,8 +20,6 @@ jobs:
         run: |
           pwd
           ls -la
-          cd akdb/
-          ls -la
 
       - name: Git config
         run: |
