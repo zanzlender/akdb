@@ -55,7 +55,7 @@ jobs:
     name: Update wiki
 
     steps:
-      working-directory: ~/
+      - working-directory: ~/
       - name: cd
         run: |
           pwd
