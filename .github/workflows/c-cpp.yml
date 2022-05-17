@@ -15,9 +15,14 @@ jobs:
       - name: install dependencies
         run: sudo apt-get install git build-essential swig make doxygen python3
 
+      - name: PWD
+        run: pwd
+
       - name: make
         working-directory: ./akdb/src
-        run: make
+        run: |
+          pwd
+          make
 
       - name: make doc
         working-directory: ./akdb/src
