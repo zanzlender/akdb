@@ -33,7 +33,7 @@ jobs:
           pwd
           make
 
-      - name: make doc
+      - name: make docs
         working-directory: ./akdb/src
         run: |
           pwd
