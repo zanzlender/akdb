@@ -53,7 +53,6 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     name: Update wiki
-    working-directory: ./akdb/doc
 
     steps:
       - uses: OrlovM/Wiki-Action@v1
