@@ -12,31 +12,24 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - name: test123
-        run: pwd
-      - name: list all files
-        run: ls -la
-      - name: change dir
-        run: cd akdb/
-      - name: list all files
-        working-directory: ./akdb
-        run: ls -la
       - name: install dependencies
         run: sudo apt-get install git build-essential swig make doxygen python3
-      - name: make
-        working-directory: ./akdb
 
+      - name: make
+        working-directory: ./akdb/src
         run: make
+
       - name: make doc
+        working-directory: ./akdb/src
         run: make doc
+
       - name: make swig
+        working-directory: ./akdb/src
         run: make swig
 
-      - name: Build and push docker images
-        run: |
-          docker login cred
-          docker build
-          docker make
+      - name: Run tests
+        working-directory: ./akdb/bin
+        run: ./akdb alltest
 
   publish:
     needs: build
