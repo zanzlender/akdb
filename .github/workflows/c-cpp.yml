@@ -21,7 +21,9 @@ jobs:
 
       - name: make doc
         working-directory: ./akdb/src
-        run: make doc
+        run: |
+          pwd
+          make doc
 
       - name: make swig
         working-directory: ./akdb/src
