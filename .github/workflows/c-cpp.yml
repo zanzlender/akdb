@@ -9,12 +9,16 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: akdb
 
     steps:
       - uses: actions/checkout@v3
 
       - name: pwd test
         run: |
+          pwd
           ls -la
           cd akdb/
           ls -la
