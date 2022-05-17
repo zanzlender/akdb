@@ -16,23 +16,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: pwd test
-        run: |
-          pwd
-          ls -la
-
-      - name: Upload Documentation to Wiki
-        uses: SwiftDocOrg/github-wiki-publish-action@v1
-        with:
-          path: "./"
-        env:
-          GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.ZZ_SECRET_KEY }}
-
-      - name: Git config
-        run: |
-          git init
-          git config --global --add safe.directory "$GITHUB_WORKSPACE"
-          git config --unset core.bare
+      #      - name: Git config
+      #        run: |
+      #          git init
+      #          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      #          git config --unset core.bare
 
       #      - uses: OrlovM/Wiki-Action@v1
       #        with:
@@ -74,6 +62,19 @@ jobs:
         working-directory: ./akdb/bin
         run: ./akdb alltest
         continue-on-error: true
+
+      - name: Upload documentation to Wiki
+        uses: SwiftDocOrg/github-wiki-publish-action@v1
+        with:
+          path: "./"
+        env:
+          GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.ZZ_SECRET_KEY }}
+
+      - name: Upload pdf file to repository
+      - uses: actions/upload-artifact@v3
+        with:
+          name: AKDB.pdf
+          path: doc/refman.pdf
 #  update-wiki:
 #    needs: build
 #    runs-on: ubuntu-latest
