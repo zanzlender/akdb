@@ -33,7 +33,7 @@ jobs:
           pwd
           make
 
-      - name: make docs
+      - name: make doc
         working-directory: ./akdb/src
         run: |
           pwd
@@ -42,10 +42,6 @@ jobs:
       - name: make swig
         working-directory: ./akdb/src
         run: make swig
-
-      - name: Build docker image
-        working-folder: ./akdn
-        run:
 
       - name: Run tests
         working-directory: ./akdb/bin
