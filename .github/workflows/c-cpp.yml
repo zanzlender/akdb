@@ -45,7 +45,7 @@ jobs:
 
       - name: Run tests
         working-directory: ./akdb/bin
-        run: ./akdb test 41
+        run: ./akdb test 42
 
   publish:
     needs: build
