@@ -3,7 +3,7 @@ FROM ubuntu
 
 #install required files
 RUN apt-get update -y
-RUN apt-get install git build-essential swig make doxygen python2.7 dos2unix python-dev libffi-dev libssl-dev curl -y
+RUN apt-get install git build-essential swig make doxygen python2.7 dos2unix python libffi-dev libssl-dev curl -y
 RUN curl https://bootstrap.pypa.io/pip/2.7/get-pip.py -o get-pip.py
 RUN python2.7 get-pip.py
 
