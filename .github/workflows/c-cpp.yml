@@ -12,6 +12,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+
       - name: install dependencies
         run: |
           sudo apt-get install git swig make doxygen dos2unix python3 python-dev python3-dev build-essential libssl-dev libffi-dev libxml2-dev libxslt1-dev zlib1g-dev
@@ -48,10 +49,14 @@ jobs:
         run: ./akdb alltest
         continue-on-error: true
 
-  publish:
+  update-wiki:
     needs: build
     runs-on: ubuntu-latest
+    name: Update wiki
+    working-directory: ./akdb/doc
 
     steps:
-      - name: Publish test
-        run: ls -la
+      - uses: OrlovM/Wiki-Action@v1
+        with:
+          path: "html"
+          token: ${{ secrets.GITHUB_TOKEN }}
