@@ -61,7 +61,6 @@ jobs:
           git config --unset core.bare
 
       - name: Update wiki
-        run: cd ..
         uses: OrlovM/Wiki-Action@v1
         with:
           path: "html"
