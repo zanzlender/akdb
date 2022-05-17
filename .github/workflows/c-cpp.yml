@@ -45,8 +45,8 @@ jobs:
 
       - name: Run tests
         working-directory: ./akdb/bin
-        continue-on-error: true
         run: ./akdb alltest
+        continue-on-error: true
 
   publish:
     needs: build
