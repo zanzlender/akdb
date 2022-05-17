@@ -16,26 +16,34 @@ jobs:
         run: sudo apt-get install git build-essential swig make doxygen python3
 
       - name: PWD
-        run: pwd
+        run: |
+          pwd
+          ls -la
+
+      - name: PWD
+        working-directory: ./akdb
+        run: |
+          pwd
+          ls -la
 
       - name: make
-        working-directory: ./src
+        working-directory: ./akdb/src
         run: |
           pwd
           make
 
       - name: make doc
-        working-directory: ./src
+        working-directory: ./akdb/src
         run: |
           pwd
           make doc
 
       - name: make swig
-        working-directory: ./src
+        working-directory: ./akdb/src
         run: make swig
 
       - name: Run tests
-        working-directory: ./bin
+        working-directory: ./akdb/bin
         run: ./akdb alltest
 
   publish:
