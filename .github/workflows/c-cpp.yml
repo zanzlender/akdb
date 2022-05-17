@@ -19,23 +19,23 @@ jobs:
         run: pwd
 
       - name: make
-        working-directory: ./akdb/src
+        working-directory: ./src
         run: |
           pwd
           make
 
       - name: make doc
-        working-directory: ./akdb/src
+        working-directory: ./src
         run: |
           pwd
           make doc
 
       - name: make swig
-        working-directory: ./akdb/src
+        working-directory: ./src
         run: make swig
 
       - name: Run tests
-        working-directory: ./akdb/bin
+        working-directory: ./bin
         run: ./akdb alltest
 
   publish:
