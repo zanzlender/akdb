@@ -33,11 +33,11 @@ jobs:
           pwd
           make
 
-      - name: make doc
-        working-directory: ./akdb/src
-        run: |
-          pwd
-          make doc
+      #      - name: make doc
+      #        working-directory: ./akdb/src
+      #        run: |
+      #          pwd
+      #          make doc
 
       - name: make swig
         working-directory: ./akdb/src
