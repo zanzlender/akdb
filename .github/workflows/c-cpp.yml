@@ -53,6 +53,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     name: Update wiki
+    working-directory: ~/
 
     steps:
       - name: cd
