@@ -7,47 +7,47 @@ on:
     branches: [master]
 
 jobs:
-  #  build:
-  #    runs-on: ubuntu-latest
-  #
-  #    steps:
-  #      - uses: actions/checkout@v3
-  #
-  #      - name: install dependencies
-  #        run: |
-  #          sudo apt-get install git swig make doxygen dos2unix python3 python-dev python3-dev build-essential libssl-dev libffi-dev libxml2-dev libxslt1-dev zlib1g-dev
-  #          sudo apt update && sudo apt upgrade -y
-  #          sudo apt-get install software-properties-common
-  #          sudo apt-add-repository universe
-  #          sudo apt-get update
-  #          sudo apt-get install python3-pip
-  #          sudo apt-get install texlive -y
-  #          sudo apt-get install texlive-latex-extra -y
-  #          sudo pip install virtualenv
-  #          sudo pip install paramiko
-  #          sudo pip install pyparsing
-  #          sudo pip install configparser
-  #
-  #      - name: make
-  #        working-directory: ./akdb/src
-  #        run: |
-  #          pwd
-  #          make
-  #
-  #      - name: make doc
-  #        working-directory: ./akdb/src
-  #        run: |
-  #          pwd
-  #          make doc
-  #
-  #      - name: make swig
-  #        working-directory: ./akdb/src
-  #        run: make swig
-  #
-  #      - name: Run and print tests
-  #        working-directory: ./akdb/bin
-  #        run: ./akdb alltest
-  #        continue-on-error: true
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: install dependencies
+        run: |
+          sudo apt-get install git swig make doxygen dos2unix python3 python-dev python3-dev build-essential libssl-dev libffi-dev libxml2-dev libxslt1-dev zlib1g-dev
+          sudo apt update && sudo apt upgrade -y
+          sudo apt-get install software-properties-common
+          sudo apt-add-repository universe
+          sudo apt-get update
+          sudo apt-get install python3-pip
+          sudo apt-get install texlive -y
+          sudo apt-get install texlive-latex-extra -y
+          sudo pip install virtualenv
+          sudo pip install paramiko
+          sudo pip install pyparsing
+          sudo pip install configparser
+
+      - name: make
+        working-directory: ./akdb/src
+        run: |
+          pwd
+          make
+
+      - name: make doc
+        working-directory: ./akdb/src
+        run: |
+          pwd
+          make doc
+
+      - name: make swig
+        working-directory: ./akdb/src
+        run: make swig
+
+      - name: Run and print tests
+        working-directory: ./akdb/bin
+        run: ./akdb alltest
+        continue-on-error: true
 
   update-wiki:
     needs: build
