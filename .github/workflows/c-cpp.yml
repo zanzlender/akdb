@@ -49,8 +49,13 @@ jobs:
         run: ./akdb alltest
         continue-on-error: true
 
+      - name: Git config
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          git config --unset core.bare
+
       - name: Update wiki
-      - uses: OrlovM/Wiki-Action@v1
+        uses: OrlovM/Wiki-Action@v1
         with:
           path: "html"
           token: ${{ secrets.GITHUB_TOKEN }}
