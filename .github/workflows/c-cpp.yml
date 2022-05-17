@@ -69,6 +69,11 @@ jobs:
         env:
           GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.ZZ_SECRET_KEY }}
 
+      -name: cd
+        run: |
+          cd doc/
+          ls -la
+
       - name: Upload pdf file to repository
         uses: actions/upload-artifact@v3
         with:
