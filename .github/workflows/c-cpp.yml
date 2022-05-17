@@ -67,7 +67,7 @@ jobs:
           git config --unset core.bare
 
       - uses: OrlovM/Wiki-Action@v1
-      - working-directory: ~/
+        working-directory: ~/
         with:
           path: "html"
           token: ${{ secrets.GITHUB_TOKEN }}
