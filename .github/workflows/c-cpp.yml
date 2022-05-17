@@ -65,9 +65,6 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     name: Update wiki
-    defaults:
-      run:
-        working-directory: akdb
 
     steps:
       - name: cd
