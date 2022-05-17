@@ -49,28 +49,34 @@ jobs:
         run: ./akdb alltest
         continue-on-error: true
 
-  update-wiki:
-    needs: build
-    runs-on: ubuntu-latest
-    name: Update wiki
-
-    steps:
-      - name: cd
-        run: |
-          pwd
-          cd ..
-          pwd
-          cd ..
-      - name: cd test
-        run: |
-          git config --global --add safe.directory "$GITHUB_WORKSPACE"
-          git config --unset core.bare
-
-      - uses: OrlovM/Wiki-Action@v1
-        working-directory: ~/
+      - name: Update wiki
+        uses: OrlovM/Wiki-Action@v1
         with:
           path: "html"
           token: ${{ secrets.GITHUB_TOKEN }}
+#  update-wiki:
+#    needs: build
+#    runs-on: ubuntu-latest
+#    name: Update wiki
+#
+#    steps:
+#      - name: cd
+#        working-directory: ./akdb
+#        run: |
+#          pwd
+#          ls -la
+#          cd akdb/
+#
+#      - name: cd test
+#        run: |
+#          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+#          git config --unset core.bare
+#
+#      - uses: OrlovM/Wiki-Action@v1
+#        with:
+#          path: "html"
+#          token: ${{ secrets.GITHUB_TOKEN }}
+
 #  upload-pdf-file:
 #    name: Upload pdf file to repository
 #    runs-on: ubuntu-latest
