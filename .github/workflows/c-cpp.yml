@@ -55,7 +55,26 @@ jobs:
     name: Update wiki
 
     steps:
+      - name: cd
+        run: |
+          pwd
+          cd ..
+          pwd
+          cd ..
       - uses: OrlovM/Wiki-Action@v1
         with:
           path: "html"
           token: ${{ secrets.GITHUB_TOKEN }}
+#  upload-pdf-file:
+#    name: Upload pdf file to repository
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#      - name: Upload file
+#        uses: svenstaro/upload-release-action@v2
+#        with:
+#          repo_token: ${{ secrets.GITHUB_TOKEN }}
+#          file: target/release/mything
+#          asset_name: AKDB.pdf
+#          tag: ${{ github.ref }}
+#          overwrite: true
