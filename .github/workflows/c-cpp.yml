@@ -55,5 +55,3 @@ jobs:
     steps:
       - name: Publish test
         run: ls -la
-
-      - name: Publish pdf file
