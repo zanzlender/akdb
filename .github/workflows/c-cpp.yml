@@ -27,9 +27,20 @@ jobs:
         working-directory: ./akdb
 
         run: make
-      - name: make distcheck
-        run: make distcheck
       - name: make doc
         run: make doc
       - name: make swig
         run: make swig
+
+      - name: Build and push docker images
+        run: |
+          docker login cred
+          docker build
+          docker make
+
+  publish:
+    needs: build
+
+    steps:
+      - name: Publish test
+        run: ls -la
