@@ -14,6 +14,7 @@ jobs:
         working-directory: akdb
 
     steps:
+      - uses: actions/checkout@v3
       #      - name: Git config
       #        run: |
       #          git init
@@ -25,7 +26,6 @@ jobs:
       #          path: "html"
       #          token: ${{ secrets.GITHUB_TOKEN }}
 
-      - uses: actions/checkout@v3
       - name: install dependencies
         run: |
           sudo apt-get install git swig make doxygen dos2unix python3 python-dev python3-dev build-essential libssl-dev libffi-dev libxml2-dev libxslt1-dev zlib1g-dev
@@ -69,10 +69,10 @@ jobs:
         env:
           GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.ZZ_SECRET_KEY }}
 
-      -name: cd
+      - name: cd
         run: |
           cd doc/
-          ls -la
+          ls
 
       - name: Upload pdf file to repository
         uses: actions/upload-artifact@v3
