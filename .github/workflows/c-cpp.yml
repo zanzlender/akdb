@@ -98,11 +98,6 @@ jobs:
             git add refman.pdf
             git commit -m "Add pdf file" refman.pdf
 
-      - name: Push changes to repository
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.ref }}
 #  update-wiki:
 #    needs: build
 #    runs-on: ubuntu-latest
