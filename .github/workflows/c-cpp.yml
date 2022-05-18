@@ -84,13 +84,13 @@ jobs:
         run: |
           docker images
 
-      - name: Publish docker image
-        uses: elgohr/Publish-Docker-Github-Action@v4
+      - name: Build nad publish docker image
+        uses: mr-smithers-excellent/docker-build-push@v5
         with:
-          name: my
+          image: akdb-image
+          registry: ghcr.io
           username: ${{github.actor}}
           password: ${{secrets.GITHUB_TOKEN}}
-          registry: ghcr.io
 
       - name: Upload pdf file to repository 3
         uses: actions/upload-artifact@v3
