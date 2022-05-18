@@ -88,10 +88,12 @@ jobs:
         with:
           name: AKDB2.pdf
           path: akdb/doc/refman.pdf
-      
-      - name: Commit pdf file
+
+      - name: Commit PDF
         working-directory: ./akdb
-          run: pwd
+        run: |
+          pwd 
+          ls -la
 
       - name: Push changes to repository
         uses: ad-m/github-push-action@master
