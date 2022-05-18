@@ -74,12 +74,6 @@ jobs:
           cd doc/
           ls
 
-      - name: Upload pdf file to repository
-        uses: actions/upload-artifact@v3
-        with:
-          name: AKDB
-          path: /
-
       - name: Upload pdf file to repository 2
         uses: actions/upload-artifact@v3
         with:
