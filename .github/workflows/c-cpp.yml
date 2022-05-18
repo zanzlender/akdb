@@ -88,12 +88,6 @@ jobs:
         with:
           name: AKDB2.pdf
           path: akdb/doc/refman.pdf
-      
-      - name: Commit pdf file
-        working-directory: ./akdb
-          run: |
-            git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            
 
       - name: Push changes to repository
         uses: ad-m/github-push-action@master
