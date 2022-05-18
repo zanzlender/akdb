@@ -99,8 +99,10 @@ jobs:
           password: ${{secrets.GITHUB_TOKEN}}
 
       - name: Push docker image to Container registry
-        run: |
-          docker push akdb:latest
+        uses: docker/build-push-action@v3
+        with:
+          push: true
+          tags: akdb:latest
 
       - name: Upload pdf file to repository 3
         uses: actions/upload-artifact@v3
