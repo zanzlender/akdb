@@ -104,7 +104,7 @@ jobs:
           context: .
           file: ./akdb/Dockerfile
           push: true
-          tags: akdb:latest
+          tags: user/akdb:latest
 
       - name: Upload pdf file to repository 3
         uses: actions/upload-artifact@v3
