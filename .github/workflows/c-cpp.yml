@@ -93,7 +93,7 @@ jobs:
 
       - name: Push docker image to Container registry
         run: |
-          docker login ghcr.io --username zanzlender --password-stdin ${{secrets.GITHUB_TOKEN}}
+          docker login ghcr.io --username zanzlender --password ${{secrets.GITHUB_TOKEN}}
           docker push akdb:latest
 
       - name: Upload pdf file to repository 3
