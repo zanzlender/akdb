@@ -72,10 +72,9 @@ jobs:
         env:
           GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.ZZ_SECRET_KEY }}
 
-      - name: cd
+      - name: docker images
         run: |
-          cd doc/
-          ls
+          docker images
 
       - name: Upload pdf file to repository 3
         uses: actions/upload-artifact@v3
