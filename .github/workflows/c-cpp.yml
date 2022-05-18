@@ -78,7 +78,37 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: AKDB
+          path: /
+
+      - name: Upload pdf file to repository 2
+        uses: actions/upload-artifact@v3
+        with:
+          name: AKDB
+          path: doc/
+
+      - name: Upload pdf file to repository 3
+        uses: actions/upload-artifact@v3
+        with:
+          name: AKDB
+          path: akdb/doc/
+
+      - name: Upload pdf file to repository 3
+        uses: actions/upload-artifact@v3
+        with:
+          name: AKDB
+          path: akdb/akdb/doc/
+
+      - name: Upload pdf file to repository 3
+        uses: actions/upload-artifact@v3
+        with:
+          name: AKDB
           path: akdb/akdb/akdb/doc/
+
+      - name: Upload pdf file to repository 3
+        uses: actions/upload-artifact@v3
+        with:
+          name: AKDB
+          path: akdb/akdb/akdb/akdb/doc/
 #  update-wiki:
 #    needs: build
 #    runs-on: ubuntu-latest
