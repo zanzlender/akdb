@@ -76,6 +76,14 @@ jobs:
         run: |
           docker images
 
+      - name: create docker image
+        run: |
+          make docker-install
+
+      - name: docker images
+        run: |
+          docker images
+
       - name: Upload pdf file to repository 3
         uses: actions/upload-artifact@v3
         with:
