@@ -74,12 +74,6 @@ jobs:
           cd doc/
           ls
 
-      - name: Upload pdf file to repository 2
-        uses: actions/upload-artifact@v3
-        with:
-          name: AKDB
-          path: doc/
-
       - name: Upload pdf file to repository 3
         uses: actions/upload-artifact@v3
         with:
@@ -89,20 +83,14 @@ jobs:
       - name: Upload pdf file to repository 3
         uses: actions/upload-artifact@v3
         with:
-          name: AKDB
-          path: akdb/akdb/doc/
+          name: AKDB.pdf
+          path: akdb/doc/refman
 
       - name: Upload pdf file to repository 3
         uses: actions/upload-artifact@v3
         with:
-          name: AKDB
-          path: akdb/akdb/akdb/doc/
-
-      - name: Upload pdf file to repository 3
-        uses: actions/upload-artifact@v3
-        with:
-          name: AKDB
-          path: akdb/akdb/akdb/akdb/doc/
+          name: AKDB2.pdf
+          path: akdb/doc/refman.pdf
 #  update-wiki:
 #    needs: build
 #    runs-on: ubuntu-latest
