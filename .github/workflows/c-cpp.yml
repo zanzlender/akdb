@@ -101,6 +101,7 @@ jobs:
       - name: Push docker image to Container registry
         uses: docker/build-push-action@v3
         with:
+          context: .
           file: ./akdb/Dockerfile
           push: true
           tags: akdb:latest
