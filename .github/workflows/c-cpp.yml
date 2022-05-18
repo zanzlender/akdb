@@ -78,7 +78,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: AKDB
-          path: akdb/akdb/doc/refman.pdf
+          path: doc/
 #  update-wiki:
 #    needs: build
 #    runs-on: ubuntu-latest
