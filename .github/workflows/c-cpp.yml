@@ -132,15 +132,7 @@ jobs:
           ls -la
           cd ..
           git add --all
-          git commit -m "add pdf and html files" refman.pdf
-
-      - name: "Test docs"
-        working-directory: ./akdb
-        run: |
-          cd .. 
-          pwd
-          cd docs/
-          ls -la
+          git commit -m "add pdf and html files"
 
       - name: Push changes to repository
         uses: ad-m/github-push-action@master
