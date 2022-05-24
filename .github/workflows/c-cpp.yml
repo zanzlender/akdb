@@ -134,6 +134,14 @@ jobs:
           git add --all
           git commit -m "add pdf and html files" refman.pdf
 
+      - name: "Test docs"
+        working-directory: ./akdb
+        run: |
+          cd doc/html
+          ls -la
+          cd ../docs
+          ls -la
+
       - name: Push changes to repository
         uses: ad-m/github-push-action@master
         with:
