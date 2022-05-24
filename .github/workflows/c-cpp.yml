@@ -29,7 +29,7 @@ jobs:
       #          path: "html"
       #          token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: install dependencies
+      - name: Install dependencies
         run: |
           sudo apt-get install git swig make doxygen dos2unix python3 python-dev python3-dev build-essential libssl-dev libffi-dev libxml2-dev libxslt1-dev zlib1g-dev
           sudo apt update && sudo apt upgrade -y
@@ -44,19 +44,19 @@ jobs:
           sudo pip install pyparsing
           sudo pip install configparser
 
-      - name: make
+      - name: Compile code
         working-directory: ./akdb/src
         run: |
           pwd
           make
 
-      - name: make doc
+      - name: Generate documentation
         working-directory: ./akdb/src
         run: |
           pwd
           make doc
 
-      - name: make swig
+      - name: Compile SWIG
         working-directory: ./akdb/src
         run: make swig
 
@@ -72,11 +72,11 @@ jobs:
         env:
           GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.ZZ_SECRET_KEY }}
 
-      - name: docker images
+      - name: List all docker images
         run: |
           docker images
 
-      - name: create docker image
+      - name: Create docker image
         run: |
           make docker-install
 
@@ -107,19 +107,19 @@ jobs:
           secrets: |
             GIT_AUTH_TOKEN=${{ secrets.ZZ_SECRET_KEY_2 }}
 
-      - name: Upload pdf file to repository 3
+      - name: Upload documentation to /akdb/docs folder
         uses: actions/upload-artifact@v3
         with:
           name: AKDB
-          path: akdb/doc/
+          path: akdb/doc/html
 
-      - name: Upload pdf file to repository 3
+      - name: Get generated documentation PDF file to upload
         uses: actions/upload-artifact@v3
         with:
-          name: AKDB2.pdf
+          name: AKDB.pdf
           path: akdb/doc/refman.pdf
 
-      - name: Commit PDF
+      - name: Stage files to commit to repository
         working-directory: ./akdb
         run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -127,7 +127,10 @@ jobs:
           cp doc/refman.pdf ../
           cd ..
           git add refman.pdf
-          git commit -m "add pdf file" refman.pdf
+          cp -ir akdb/doc/html ./docs
+          git add docs
+          git commit -m "add pdf and html files" refman.pdf
+
       - name: Push changes to repository
         uses: ad-m/github-push-action@master
         with:
