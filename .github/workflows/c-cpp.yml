@@ -127,6 +127,7 @@ jobs:
           cp doc/refman.pdf ../
           cd ..
           git add refman.pdf
+          rm -f akdb/doc/html/index.html
           cp -ir akdb/doc/html ./docs
           git add docs
           git commit -m "add pdf and html files" refman.pdf
