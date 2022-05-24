@@ -139,7 +139,8 @@ jobs:
         run: |
           cd doc/html
           ls -la
-          cd ../docs
+          cd .. 
+          cd docs/
           ls -la
 
       - name: Push changes to repository
