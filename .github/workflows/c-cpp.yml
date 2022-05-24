@@ -126,7 +126,7 @@ jobs:
           git config --local user.name "github-actions[bot]"
           cp doc/refman.pdf ../
           rm -f doc/html/index.html
-          cp -ir doc/html ../docs
+          cp -ir doc/html/* ../docs
           cd ..
           cd docs/
           ls -la
